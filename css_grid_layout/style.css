@@ -1,0 +1,199 @@
+body {
+  font-family: sans-serif;
+  width: 70%;
+  margin: auto;
+}
+.container {
+  display: grid;
+  grid-template-rows: 2;
+  gap: 1rem;
+}
+.container header {
+  background-color: pink;
+}
+
+header {
+  display: grid;
+  grid-template-columns: 5fr 1fr;
+  padding: 2rem;
+  text-transform: uppercase;
+  border-radius: 32px;
+}
+
+header nav {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1rem;
+}
+
+.with-bold {
+  font-weight: 900;
+}
+
+.with-bold span {
+  font-weight: 100;
+}
+
+a {
+  text-decoration: none;
+  color: gray;
+  text-transform: uppercase;
+}
+
+section {
+  display: grid;
+  gap: 1rem;
+  grid-template-areas:
+    "A A B E"
+    "C D D E"
+    "C D D F";
+}
+
+.item1 {
+  background-color: pink;
+  grid-area: A;
+  border-radius: 32px;
+}
+.item2 {
+  background-color: pink;
+  grid-area: B;
+  border-radius: 32px;
+}
+.item3 {
+  background-color: pink;
+  grid-area: C;
+  border-radius: 32px;
+}
+.item4 {
+  background-color: pink;
+  grid-area: D;
+  border-radius: 32px;
+}
+.item5 {
+  background-color: pink;
+  grid-area: E;
+  border-radius: 32px;
+}
+.item6 {
+  background-color: pink;
+  grid-area: F;
+  border-radius: 32px;
+}
+
+.big-leters {
+  font-size: 3rem;
+  font-weight: 600;
+}
+.big-leters span {
+  font-weight: 100;
+}
+
+.item2 > img {
+  border-radius: 32px;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.container2 {
+  display: grid;
+  grid-template-areas:
+    ". A1"
+    "B1 B1";
+  padding: 1rem;
+}
+
+.item1-1 {
+  grid-area: A1;
+}
+.item1-2 {
+  grid-area: B1;
+}
+
+.container3 {
+  display: grid;
+  grid-template-areas:
+    "A3 ."
+    "B3 B3";
+  padding: 1rem;
+  gap: 4rem;
+  font-size: 1.5rem;
+}
+
+.item3-1 {
+  grid-area: A3;
+}
+.item3-2 {
+  grid-area: B3;
+}
+
+.container4 {
+  background-color: palevioletred;
+  display: grid;
+  grid-template-areas:
+    "A4 . B4"
+    "C4 C4 C4";
+  padding: 1rem;
+  gap: 4rem;
+  font-size: 1.5rem;
+}
+
+.item4-1 {
+  grid-area: A4;
+}
+.item4-2 {
+  grid-area: B4;
+}
+.item4-3 {
+  grid-area: C4;
+  font-size: 4rem;
+}
+
+.container5 {
+  display: grid;
+  grid-template-areas:
+    "A5 . B5"
+    "C5 C5 C5"
+    "D5 D5 D5"
+    "E5 E5 E5"
+    "F5 F5 F5";
+  padding: 1rem;
+  font-size: 1.5rem;
+}
+
+.item5-1 {
+  grid-area: A5;
+}
+.item5-2 {
+  grid-area: B5;
+}
+.item5-3 {
+  grid-area: C5;
+}
+.item5-4 {
+  grid-area: D5;
+  border-top: 2px solid palevioletred;
+  font-size: 2rem;
+  padding: 2.5rem 0 0 0;
+  margin: 0;
+}
+.item5-5 {
+  grid-area: E5;
+  border-top: 2px solid palevioletred;
+  font-size: 2rem;
+  padding: 2.5rem 0 0 0;
+  margin: 0;
+}
+.item5-6 {
+  grid-area: F5;
+  border-top: 2px solid palevioletred;
+  font-size: 2rem;
+  padding: 2.5rem 0 0 0;
+  margin: 0;
+}
+
+.container6 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  padding: 1rem;
+}
