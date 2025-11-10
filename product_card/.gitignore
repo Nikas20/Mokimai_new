@@ -1,3 +1,0 @@
-# Ignore log files and node_modules folder
-*.log
-node_modules/
