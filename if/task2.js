@@ -90,3 +90,150 @@ function favoriteNumber(fav, guess) {
     return "You got it!";
   }
 }
+
+function midScore(a, b, c ) {
+  let  num =[a, b, c ]
+
+  let length = num.length
+
+  for (let index = 0; index < length; index++) {
+    const sum = array[index]; 
+  }
+  return sum / length
+}
+
+function bigestScore(a, b) {
+ return Math.max(a, b)
+}
+
+function checkLock(a, b, c, d) {
+  const numbers = [a, b, c, d]
+
+
+  if (numbers[0] = 3 || numbers[0] == 5 || numbers[0] == 7) {
+    if (numbers[1] == 2) {
+      if (5 >= numbers[2] <= 100) {
+        if (20 < numbers[2] || 9 > numbers[2]) {
+          return "correct"
+        } else{
+          return" incorrect because the fourth number is between 9 and 20"
+        }
+      }else{
+        return" incorrect because the third number is between 5 and 100"
+      }
+    }else{
+      return "'incorrect' because the second number isn't a 2"
+    }
+  } else{
+    return "'incorrect' because the first number isn't a 3, 5, or 7"
+  }
+
+}
+
+function canIGet(str, num) {
+ if (str == "MacBook Air" && num == 999) {
+  return true
+ } else if (str == "MacBook Pro" && num == 1299) {
+  return true
+ } else if (str == "Mac Pro" && num == 2499) {
+  return true
+ } else if (str == "Apple Sticker" && num == 1) {
+  return true
+ } else {
+  return false
+ }
+}
+
+function tipAmount(num, str) {
+  let amount = 0;
+
+  if (str == "good") {
+    amount = 20
+return num / 100 * amount
+  } else if (str == "fair") {
+    amount = 15
+return num / 100 * amount
+  } else if (str == "poor") {
+    amount = 10
+return num / 100 * amount
+  } else {
+    return "mot corect"
+  }
+}
+
+function totalAmount(num, str) {
+
+return num + tipAmount(num, str)
+
+}
+
+function splitAmount(num, str, pepl) {
+  let number = num / pepl
+  return number + tipAmount(number, str)
+}
+
+function isEven(num) {
+  return n % 2 == 0;
+}
+
+function isOdd(num) {
+  return Math.abs(n % 2) == 1;
+}
+
+function rockPaperScissors(player1, player2) {
+  if (player1 == player2) {
+    return "draw"
+  } else  if (player1 == "rock" && player2 == "scissors") {
+    return "Win Playr 1"
+  } else  if (player1 == "scissors" && player2 == "rock") {
+    return "Win Playr 2"
+  } else  if (player1 == "paper" && player2 == "rock") {
+    return "Win Playr 1"
+  } else  if (player1 == "rock" && player2 == "paper") {
+    return "Win Playr 2"
+  } else  if (player1 == "scissors" && player2 == "paper") {
+    return "Win Playr 1"
+  } else  if (player1 == "paper" && player2 == "scissors") {
+    return "Win Playr 2"
+  } else {
+    return "not corect"
+  }
+}
+
+function letterGrade(num) {
+  if (num <= 59) {
+    return "F"
+  } else if (60 <= num <= 62) {
+    return "D-"
+  } else if (63 <= num <= 66) {
+    return "D"
+  } else if (67 <= num <= 69) {
+    return "D+"
+  } else if (70 <= num <= 72) {
+    return "C-"
+  } else if (73 <= num <= 76) {
+    return "C"
+  } else if (77 <= num <= 79) {
+    return "C+"
+  } else if (80 <= num <= 82) {
+    return "B-"
+  } else if (83 <= num <= 86) {
+    return "B"
+  } else if (87 <= num <= 89) {
+    return "B+"
+  } else if (90 <= num <= 92) {
+    return "A-"
+  } else if (93 <= num <= 96) {
+    return "A"
+  } else if (97 <= num <= 99) {
+    return "A+"
+  }
+}
+
+function daysInMonthByNumber(monthNum) {
+  if (!Number.isInteger(monthNum) || monthNum < 1 || monthNum > 12) {
+    throw new Error(`Expected a month number from 1-12, received: ${monthNum}`);
+  }
+
+  // This is your job. :)
+}
