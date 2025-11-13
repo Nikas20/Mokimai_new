@@ -235,5 +235,5 @@ function daysInMonthByNumber(monthNum) {
     throw new Error(`Expected a month number from 1-12, received: ${monthNum}`);
   }
 
-  // This is your job. :)
+   return new Date(2025, monthNum, 0).getDate();
 }
