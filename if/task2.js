@@ -203,29 +203,29 @@ function rockPaperScissors(player1, player2) {
 function letterGrade(num) {
   if (num <= 59) {
     return "F"
-  } else if (60 <= num <= 62) {
+  } else if (60 <= num && num <= 62) {
     return "D-"
-  } else if (63 <= num <= 66) {
+  } else if (63 <= num && num <= 66) {
     return "D"
-  } else if (67 <= num <= 69) {
+  } else if (67 <= num && num <= 69) {
     return "D+"
-  } else if (70 <= num <= 72) {
+  } else if (70 <= num && num <= 72) {
     return "C-"
-  } else if (73 <= num <= 76) {
+  } else if (73 <= num && num <= 76) {
     return "C"
-  } else if (77 <= num <= 79) {
+  } else if (77 <= num && num <= 79) {
     return "C+"
-  } else if (80 <= num <= 82) {
+  } else if (80 <= num && num <= 82) {
     return "B-"
-  } else if (83 <= num <= 86) {
+  } else if (83 <= num && num <= 86) {
     return "B"
-  } else if (87 <= num <= 89) {
+  } else if (87 <= num && num <= 89) {
     return "B+"
-  } else if (90 <= num <= 92) {
+  } else if (90 <= num && num <= 92) {
     return "A-"
-  } else if (93 <= num <= 96) {
+  } else if (93 <= num && num <= 96) {
     return "A"
-  } else if (97 <= num <= 99) {
+  } else if (97 <= num && num <= 99) {
     return "A+"
   }
 }
