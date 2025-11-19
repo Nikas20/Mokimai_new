@@ -19,10 +19,10 @@ function avg5(num1, num2, num3, num4, num5) {
     case avg > 9:
       return "Petriukas gaus tris saldainius";
       break;
-    case 7 <= avg <= 9:
+    case 7 <= avg && avg <= 9:
       return "Petriukas gaus du saldainius";
       break;
-    case 7 < avg:
+    case 7 > avg:
       return "Petriukas gaus vieną saldainį";
       break;
     default:
