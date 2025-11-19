@@ -181,13 +181,13 @@ function temperatureRange(temp) {
       console.log("Freezing");
 
       break;
-    case 0 <= temp <= 10:
+    case 0 <= temp && temp <= 10:
       console.log("Cold");
       break;
     case 11 <= temp <= 20:
       console.log("Mild");
       break;
-    case 21 <= temp <= 30:
+    case 21 <= temp && temp <= 30:
       console.log("Warm");
       break;
     case 30 < temp:
