@@ -611,24 +611,88 @@ let task30 = () => {
 };
 // task30();
 let task31 = () => {
-  let recognizeEmployees = ([...array], [...array2]) => {};
+  let recognizeEmployees = ([...array], [...array2]) => {
+    let a = array.filter((e) => !array2.includes(e));
+    const b = [].concat(
+      a.map((e) => `Great job, ${e}!`),
+      array2.map((e) => `Outstanding  job, ${e}!`)
+    );
+    return b;
+  };
+  console.log(recognizeEmployees(["Susan", "Anthony", "Bill"], ["Bill"]));
+  console.log(
+    recognizeEmployees(["Susan", "Anthony", "Bill"], ["Bill", "Susan"])
+  );
+  console.log(
+    recognizeEmployees(["Susan", "Anthony", "Bill"], ["Jennifer", "Dylan"])
+  );
 };
-task31();
-let task32 = () => {};
-task32();
-let task33 = () => {};
-task33();
-let task34 = () => {};
-task34();
-let task35 = () => {};
-task35();
-let task36 = () => {};
-task36();
-let task37 = () => {};
-task37();
-let task38 = () => {};
-task38();
-let task39 = () => {};
-task39();
-let task40 = () => {};
-task40();
+// task31();
+let task32 = () => {
+  let alphaSort = ([...array]) => {
+    return array.sort();
+  };
+  console.log(alphaSort(["b", "a", "c"]));
+};
+// task32();
+let task33 = () => {
+  let strLengthSort = ([...array]) => {
+    return array.sort((a, b) => a.length - b.length);
+  };
+  console.log(strLengthSort(["Apple", "Banana", "Cherry"]));
+};
+// task33();
+let task34 = () => {
+  let sumSort = ([...array]) => {
+    return array.sort();
+  };
+  console.log(sumSort([[9, 1, 9], [2], [4, 5]]));
+};
+// task34();
+let task35 = () => {
+  let sortArray = ([...array]) => {
+    return array.sort((a, b) => {
+      a - b;
+    });
+  };
+  console.log(sortArray([23, 11, 4, 35, 6]));
+};
+// task35();
+let task36 = () => {
+  let result;
+  let task = ["1", "2", "3", "4", "5"];
+
+  result = task.map((e) => Number(e));
+
+  console.log(result);
+};
+// task36();
+let task37 = () => {
+  let array = ["apple", "pear", "cherry"];
+  let result;
+  result = array.map((e) => e.toUpperCase());
+  console.log(result);
+};
+// task37();
+let task38 = () => {
+  let array = [5, 4.23, 6.4, 8.09, 3.2];
+  let result;
+  result = array.map((e) => `$${e.toFixed(2)}`);
+  console.log(result);
+};
+// task38();
+let task39 = () => {
+  let array = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
+  let result;
+  result = array.map((e) => `$${e.slice(0, 3)}`);
+  console.log(result);
+};
+// task39();
