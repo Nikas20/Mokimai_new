@@ -156,21 +156,51 @@ let repeat = (str, num = 1) => {
 let insert = (str, str2 = "", char = 0) => {
   let result;
 
-  result =
-
+  let part1 = str.slice(0, char);
+  let part2 = str.slice(char);
+  result = part1 + str2 + part2;
   console.log(result);
 };
-insert('We are doing some exercises.')
-insert('We are doing some exercises.','JavaScript ')
-insert('We are doing some exercises.','JavaScript ',18)
-let humanize_format = (str) => {
+// insert('We are doing some exercises.')
+// insert('We are doing some exercises.','JavaScript ')
+// insert('We are doing some exercises.','JavaScript ',18)
+
+let humanize_format = (num) => {
   let result;
+  let str = num.toString();
+  let numArray = str.split("");
+  for (let i = 0; i < numArray.length; i++) {
+    if (numArray[i] == numArray[numArray.length - 1]) {
+      if (numArray[i] % 4 == 0) {
+        numArray[i] = numArray[i] + "th";
+      } else if (numArray[i] % 3 == 0) {
+        numArray[i] = numArray[i] + "rd";
+      } else if (numArray[i] % 2 == 0) {
+        numArray[i] = numArray[i] + "nd";
+      } else {
+        numArray[i] = numArray[i] + "st";
+      }
+    }
+  }
+  result = numArray.join("").toString();
 
   console.log(result);
 };
+// humanize_format(1);
+// humanize_format(8);
+// humanize_format(301);
+// humanize_format(402);
 
-let text_truncate = (str) => {
+let text_truncate = (str, num = str.length, operator = "...") => {
   let result;
+  if (num == str.length) {
+    result = str;
+  } else {
+    result = str.slice(0, num - operator.length) + operator;
+  }
 
   console.log(result);
 };
+// text_truncate("We are doing JS string exercises.");
+// text_truncate("We are doing JS string exercises.", 19);
+// text_truncate("We are doing JS string exercises.", 15, "!!");
