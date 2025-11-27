@@ -13,4 +13,11 @@ class MinMax {
     }
 }
 
-export {MinMax}
+class Scrabble {
+    constructor(tile, score) {
+        this.tile = tile
+        this.score = score
+    }
+}
+
+export {MinMax, Scrabble}
