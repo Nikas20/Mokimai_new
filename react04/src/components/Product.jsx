@@ -5,7 +5,7 @@ function Product(props) {
         <>
         <h1>{title}</h1>
         <p>{price}</p>
-        <p>{onSale}</p>
+        <p style={{color:onSale ? "red" : "white"}}>{onSale ? "SALE!" : "not on sale"}</p>
         </>
     )
 }

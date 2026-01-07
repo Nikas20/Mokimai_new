@@ -4,7 +4,7 @@ import Product from './components/Product'
 function App() {
 
   const prodctArray = products.map((product) => {
-    return <Product product={product} key={product.id}/>
+    return <Product title={product.title} price={product.price} onSale={product.onSale} key={product.id}/>
   })
 console.log(prodctArray);
 
