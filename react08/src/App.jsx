@@ -5,6 +5,7 @@ import DynamicInputField from "./components/DynamicInputField"
 import Show_Hide from "./components/Show_Hide"
 import Management from './components/Management'
 import MultipleCounters from './components/MultipleCounters'
+import TodoList from './components/TodoList'
 function App() {
 
 
@@ -29,6 +30,9 @@ function App() {
       </div>
       <div>
         <MultipleCounters />
+      </div>
+      <div>
+        <TodoList />
       </div>
     </>
   )
