@@ -26,10 +26,10 @@ function PokemonGet() {
         <div>{error}</div>
         <div className="grid grid-cols-4 gap-4">
             {pokemons.map((pokemon) => (
-                <div id="card" key={pokemon.id}>
-                    <img src={pokemon.img} alt={pokemon.name} />
+                <div id="card" key={pokemon.id} className="grid grid-cols-1 content-center">
+                    <img src={pokemon.frontURL} alt={pokemon.name}  className="mx-auto"/>
                     <p>{pokemon.name}</p>
-                    <p>{pokemon.hp}</p>
+                    <p>❤️{pokemon.hp}</p>
                 </div>
             ))}
         </div>
