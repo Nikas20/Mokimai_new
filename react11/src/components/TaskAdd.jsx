@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-function TaskAdd() {
+function TaskAdd({fetchData, closeModal}) {
 
 const {
     register,
@@ -9,7 +9,8 @@ const {
   } = useForm({
     defaultValues: {
       taskName: "",
-      priority: ""
+      priority: "",
+      status:0
     },
   });
 
@@ -29,6 +30,8 @@ const {
         )
          if (response.ok) {
         alert("Success");
+        fetchData();
+        closeModal();
       } else {
         throw Error("eerro");
       }
@@ -43,42 +46,42 @@ const {
 
     return(
         <>
-        <div>
-            <h2>Add Task</h2>
+        <div className="flex justify-between">
+            <h2 className="text-2xl font-bold">Add Task</h2>
             <button>X</button>
         </div>
         <form onSubmit={handleSubmit(formSubmitHandler)}>
             <div>
-            <div>
-            <label htmlFor="taskName"></label>
+            <div className="grid grid-cols-1">
+            <label htmlFor="taskName">Task</label>
             <input type="text" {...register("taskName",{
                 maxLength:{
                     value:20,
                     message:"To long"
                 }
-            })}/>
+            })} placeholder="send article to editor" className="border "/>
             {/* <p>{errors.taskName.message}</p> */}
             </div>
             <div>
-            <div>Choose your favorite color:</div>
-          <label>
-            <input type="radio" value="hight" {...register("priority")} />
+            <div>Priority</div>
+            <div className="">
+          <label className="bg-red-200 has-checked:bg-red-700  text-black has-checked:text-white px-2 py-1 mr-2 border-black">
+            <input type="radio" value="hight" {...register("priority")} className="hidden"/>
             Hight
           </label>
-          <label>
-            <input type="radio" value="medium" {...register("priority")} />
+          <label className="bg-yellow-200 has-checked:bg-yellow-700 text-black has-checked:text-white px-2 py-1 mr-2 border-black">
+            <input type="radio" value="medium" {...register("priority")} className="hidden"/>
             Medium
           </label>
-          <label>
-            <input type="radio" value="low" {...register("priority")} />
+          <label className="bg-green-200 has-checked:bg-green-700 text-black has-checked:text-white px-2 py-1 mr-2 border-black">
+            <input type="radio" value="low" {...register("priority")} className="hidden"/>
             Low
-          </label>
+          </label >
+          </div>
+          <input type="hidden" name="status" value={0} {...register("status")} />
         </div>
 </div>
-            <label >
-            <input type="submit" value="Submit"/>
-            Add
-            </label>
+            <input type="submit" value="Add" className="float-end mr-5 bg-blue-600 text-white px-5 py-2 rounded-4xl"/>
         </form>
         </>
     )

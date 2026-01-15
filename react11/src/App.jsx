@@ -6,8 +6,12 @@ function App() {
 
   return (
     <>
-      <TaskAdd/>
+    <div className="bg-gray-200">
+    
+      {/* <TaskAdd/> */}
+      
       <TaskList />
+    </div>  
     </>
   )
 }
