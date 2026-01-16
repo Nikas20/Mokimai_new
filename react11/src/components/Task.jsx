@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import TaskDelete from "./TaskDelete";
 function Task({task, fetchData} ) {
       const modalRef = useRef(null);
@@ -14,6 +14,22 @@ function Task({task, fetchData} ) {
       modalRef.current.close(); // close modal
     }
   };
+
+  const [statusText, setStatusText] = useState("To Do")
+
+  const StatusChange = () => {
+      if (task.status == 0) {
+      setStatusText("In Progress")
+      task.status = 50
+    } else if (task.status == 50) {
+      setStatusText("Done")
+      task.status = 100
+    }else if (task.status == 100) {
+      setStatusText("To Do")
+      task.status = 0
+    }
+    
+  }
  
     return (
         <>
@@ -28,9 +44,11 @@ function Task({task, fetchData} ) {
                 <p>{task.priority}</p>
             </div>
             <div className="grid grid-cols-2 gap-5">
-            <button>To Do</button>
-            {/* <img src="" alt="" /> */}
-            <p>{task.status}</p>
+            <button onClick={StatusChange}>{statusText}</button>
+            {/* Progress status */}
+
+            <div className="radial-progress" style={{"--value":task.status} /* as React.CSSProperties */ } 
+  aria-valuenow={task.status} role="progressbar"></div>
             </div>
             <button>Edit</button>
             <button onClick={openModal}
