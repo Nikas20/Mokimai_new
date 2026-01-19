@@ -9,7 +9,7 @@ function TaskDelete({ task, fetchData, closeModal }) {
       if (response.ok) {
         alert("Data deleted");
         fetchData();
-        closeModal(); // ✅ close modal
+        closeModal();
       } else {
         throw new Error("Error deleting task");
       }

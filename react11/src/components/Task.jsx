@@ -1,5 +1,6 @@
 import { useRef, useState } from "react";
 import TaskDelete from "./TaskDelete";
+import TaskEdit from "./TaskEdit";
 function Task({task, fetchData} ) {
       const modalRef = useRef(null);
 
@@ -16,6 +17,7 @@ function Task({task, fetchData} ) {
   };
 
   const [statusText, setStatusText] = useState("To Do")
+  const [editer, setEditer] = useState(true)
 
   const StatusChange = () => {
       if (task.status == 0) {
@@ -28,8 +30,9 @@ function Task({task, fetchData} ) {
       setStatusText("To Do")
       task.status = 0
     }
-    
   }
+
+
  
     return (
         <>
@@ -50,10 +53,15 @@ function Task({task, fetchData} ) {
             <div className="radial-progress" style={{"--value":task.status} /* as React.CSSProperties */ } 
   aria-valuenow={task.status} role="progressbar"></div>
             </div>
-            <button>Edit</button>
+
+            <button onClick={() => {
+              setEditer(!editer)
+            }}>Edit</button>
+            
             <button onClick={openModal}
             className="bg-blue-600 text-white p-1 w-32 rounded-lg">Delite</button>
         </div>
+       {editer && < TaskEdit task = {task}/>}
          {/* daisyUI Modal */}
         <dialog ref={modalRef} className="modal">
           <div className="modal-box">
