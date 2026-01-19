@@ -4,6 +4,7 @@ function PokemonGet() {
 
     const [pokemons, setPokemons] = useState([]);
     const [error, setError] = useState("")
+    const [search, setSearch] = useState("");
 
 
     const fetchData = async () => {
@@ -24,11 +25,22 @@ function PokemonGet() {
         fetchData();
     },[])
 
+    const filteredPokemons = pokemons.filter((pokemon) =>
+    pokemon.name.toLowerCase().includes(search.toLowerCase())
+  );
+
     return(
         <>
         <div>{error}</div>
+        <input
+          type="text"
+          placeholder="Search pokemon..."
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          className="mt-5"
+        />
         <div className="grid grid-cols-4 gap-4">
-            {pokemons.map((pokemon) => (
+            {filteredPokemons.map((pokemon) => (
                 <Pokemon pokemon={pokemon} key={pokemon.id} fetchData={fetchData}/>
             ))}
         </div>

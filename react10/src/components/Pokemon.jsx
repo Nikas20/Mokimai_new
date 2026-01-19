@@ -70,7 +70,7 @@ function Pokemon({pokemon, fetchData}) {
                     <p>❤️{pokemon.hp}</p>
                 </div>
                 <button onClick={() => deleteData(pokemon.id)} className="bg-red-400">Delete</button>
-                <button onClick={() => updateData(pokemon.id)}>10 Health points</button>
+                <button onClick={() => updateData(pokemon.id)} className="bg-blue-400">+10 Health points</button>
              </div>
              </>   
     )
