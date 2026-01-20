@@ -1,9 +1,12 @@
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
-function MovieAdd({fetchData}) {
-  const {
+function MovieEdit({movie}) {
+    const {id, title, genre, year, rating} = movie
+    const {
     register,
     handleSubmit,
     reset,
+    setValue,
     formState: { errors },
   } = useForm({
     defaultValues: {
@@ -18,20 +21,20 @@ function MovieAdd({fetchData}) {
     console.log(FormData);
 
     const requestOptions = {
-      method: "POST",
+      method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(FormData),
     };
 
     try {
       const response = await fetch(
-        "http://localhost:3000/movies",
+        "http://localhost:3000/movies" + id,
         requestOptions,
       );
       if (response.ok) {
         alert("Success");
         reset();
-        fetchData()
+
       } else {
         throw Error("eerro");
       }
@@ -39,6 +42,13 @@ function MovieAdd({fetchData}) {
       console.log(error.message);
     }
   };
+
+  useEffect(()=> {
+    setValue("title", title)
+    setValue("genre", genre)
+    setValue("year", year)
+    setValue("rating", rating)
+  },[title,genre,year,rating,setValue])
 
   return (
     <>
@@ -70,5 +80,6 @@ function MovieAdd({fetchData}) {
       </form>
     </>
   );
-}
-export default MovieAdd;
+} 
+
+export default MovieEdit

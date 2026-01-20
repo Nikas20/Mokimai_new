@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import Movie from "./Movie";
+import MovieAdd from "./MovieAdd"
 
 function MoviesList() {
     const [movies, setMovies] = useState([]);
@@ -11,6 +13,7 @@ function MoviesList() {
               throw new Error("Eror in list");
             } 
             const result = await response.json();
+            
       setMovies(result);
         } catch (error) {
             setError(error.message);
@@ -18,17 +21,28 @@ function MoviesList() {
         }
     }
 
-    useEffect(() => {
+    useEffect(() => {   
     fetchData();
   }, []);
 
     return(
         <>
         <main>
-            <div><MovieAdd/></div>
-            <div>{movies.map((movie) => {
-                <Movie movie={movie} key={movie.id} fetchData={fetchData}/>
-            })}</div>
+            {error}
+            <div className="ml-10 mb-10 border border-2"><MovieAdd fetchData= {fetchData}/></div>
+            <div>
+                <div className="grid grid-cols-6">
+            <p>Title</p>
+            <p>Genre</p>
+            <p>Year</p>
+            <p>Rating</p>
+            <p></p>
+            <p></p>
+</div>
+            {movies.map((movie) => (
+            <Movie movie={movie} key={movie.id} fetchData= {fetchData}/>
+            ))}
+            </div>
         </main>
         </>
     )
