@@ -1,11 +1,11 @@
 {
   "movies": [
     {
-      "id": "1",
-      "title": "Run",
+      "title": "Ran",
       "genre": "horor",
       "year": "2001",
-      "rating": 1
+      "rating": "1",
+      "id": "1"
     },
     {
       "id": "2",

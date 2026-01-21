@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
-function MovieEdit({movie}) {
+function MovieEdit({movie, fetchData}) {
     const {id, title, genre, year, rating} = movie
     const {
     register,
@@ -28,7 +28,7 @@ function MovieEdit({movie}) {
 
     try {
       const response = await fetch(
-        "http://localhost:3000/movies" + id,
+        "http://localhost:3000/movies/" + id,
         requestOptions,
       );
       if (response.ok) {
