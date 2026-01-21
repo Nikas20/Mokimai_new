@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
-function MovieEdit({movie, fetchData}) {
+function MovieEdit({movie, fetchData,closeModal}) {
     const {id, title, genre, year, rating} = movie
     const {
     register,
@@ -34,7 +34,8 @@ function MovieEdit({movie, fetchData}) {
       if (response.ok) {
         alert("Success");
         reset();
-
+        fetchData();
+        closeModal();
       } else {
         throw Error("eerro");
       }
