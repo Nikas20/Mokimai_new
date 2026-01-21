@@ -1,7 +1,8 @@
 import { Outlet } from "react-router";
 import { useRef } from "react";
 import MovieEdit from "./MovieEdit";
-function Movie({ movie, fetchData }) {
+import {deliteDAta} from "../services/delite"
+function Movie({ movie,  }) {
 
   const modalRef = useRef(null);
 
@@ -19,17 +20,8 @@ function Movie({ movie, fetchData }) {
 
 
   const deleteData = async (id) => {
-    try {
-      const response = await fetch("http://localhost:3000/movies/" + id, {
-        method: "DELETE",
-      });
-
-      if (response.ok) {
-        alert("Data deleted");
-        fetchData();
-      } else {
-        throw new Error("Error deleting task");
-      }
+    try{
+      deliteDAta(id)
     } catch (error) {
       alert(error.message);
     }
@@ -58,11 +50,10 @@ function Movie({ movie, fetchData }) {
               
             </div>
             <div>
-            <MovieEdit
-  fetchData={fetchData}
+            {/* <MovieEdit
   movie={movie}
   closeModal={closeModal}
-/>
+/> */}
 
             <button
                 onClick={closeModal}

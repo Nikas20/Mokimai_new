@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Movie from "./Movie";
 import MovieAdd from "./MovieAdd"
+import {getAllData} from "../services/get";
 
 function MoviesList() {
     const [movies, setMovies] = useState([]);
@@ -8,13 +9,19 @@ function MoviesList() {
 
     const fetchData = async () => {
         try {
-            const response = await fetch("http://localhost:3000/movies")
-            if (!response.ok) {
-              throw new Error("Eror in list");
-            } 
-            const result = await response.json();
+
+        //     const response = await fetch("http://localhost:3000/movies")
+        //     if (!response.ok) {
+        //       throw new Error("Eror in list");
+        //     } 
+        //     const result = await response.json();
+
+            const results = await getAllData()
+            console.log(results);
             
-      setMovies(result);
+      setMovies(results);
+   
+      
         } catch (error) {
             setError(error.message);
             
@@ -22,6 +29,7 @@ function MoviesList() {
     }
 
     useEffect(() => {   
+        
     fetchData();
   }, []);
 
@@ -40,7 +48,7 @@ function MoviesList() {
             <p></p>
 </div>
             {movies.map((movie) => (
-            <Movie movie={movie} key={movie.id} fetchData= {fetchData}/>
+            <Movie movie={movie} key={movie.id}/>
             ))}
             </div>
         </main>

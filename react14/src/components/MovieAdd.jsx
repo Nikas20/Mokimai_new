@@ -1,4 +1,5 @@
 import { useForm } from "react-hook-form";
+import { postData } from "../services/post";
 function MovieAdd({fetchData}) {
   const {
     register,
@@ -17,24 +18,14 @@ function MovieAdd({fetchData}) {
   const formSubmitHandler = async (FormData) => {
     console.log(FormData);
 
-    const requestOptions = {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(FormData),
-    };
-
     try {
-      const response = await fetch(
-        "http://localhost:3000/movies",
-        requestOptions,
-      );
-      if (response.ok) {
-        alert("Success");
-        reset();
+      const postedDate = await postData(FormData)
+
+      if (postedDate) alert("Post successfull")
+        
+        reset()
         fetchData()
-      } else {
-        throw Error("eerro");
-      }
+       
     } catch (error) {
       console.log(error.message);
     }

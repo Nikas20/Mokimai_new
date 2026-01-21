@@ -1,15 +1,18 @@
 import './App.css'
-import MoviesList from './components/MoviesList'
-import {Routes, Route } from "react-router";
-import MovieEdit from './components/MovieEdit';
+import React from 'react';
+const MoviesList = React.lazy(() => import("./components/MoviesList"))
+import Loading from './components/Loading';
+
+
+import React, { Suspense } from 'react';
 function App() {
 
 
   return (
     <>
-    <Routes>
-      <Route index element={<MoviesList />}/>
-</Routes>
+<Suspense fallback={<Loading/>}>
+ <MoviesList />
+</Suspense>
     </>
   )
 }
