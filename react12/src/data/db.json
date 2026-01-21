@@ -1,0 +1,16 @@
+{
+    "players":[
+        {
+            "id":1,
+            "name":"Tom"
+        },
+        {
+            "id":2,
+            "name":"Otm"
+        },
+        {
+            "id":3,
+            "name":"Mot"
+        }
+    ]
+}
