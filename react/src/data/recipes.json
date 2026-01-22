@@ -1,0 +1,48 @@
+{
+    "recipes": [
+        {
+            "id": 1,
+            "name": "Spaghetti Bolognese",
+            "img": "12123123",
+            "category": "Italian",
+            "ingredients": [
+                "200g spaghetti",
+                "100g minced beef",
+                "1 onion",
+                "2 cloves garlic",
+                "400g canned tomatoes",
+                "2 tbsp olive oil",
+                "Salt",
+                "Pepper",
+                "Parmesan cheese"
+            ],
+            "instructions": [
+                "Cook spaghetti according to package instructions.",
+                "Heat olive oil in a pan and sauté chopped onions and garlic until translucent.",
+                "Add minced beef and cook until browned.",
+                "Pour in canned tomatoes, season with salt and pepper, and simmer for 20 minutes.",
+                "Serve sauce over spaghetti and top with grated Parmesan cheese."
+            ]
+        },
+        {
+            "id": 2,
+            "name": "Chicken Caesar Salad",
+            "img": "12123123",
+            "category": "Italian",
+            "ingredients": [
+                "2 chicken breasts",
+                "1 head romaine lettuce",
+                "50g croutons",
+                "30g Parmesan cheese",
+                "Caesar dressing"
+            ],
+            "instructions": [
+                "Grill chicken breasts until fully cooked, then slice.",
+                "Chop romaine lettuce and place in a bowl.",
+                "Add croutons and sliced chicken to the bowl.",
+                "Drizzle with Caesar dressing and toss to combine.",
+                "Top with shaved Parmesan cheese before serving."
+            ]
+        }
+    ]
+}
