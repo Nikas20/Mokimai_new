@@ -31,25 +31,12 @@
       "instructions": []
     },
     {
-      "id": "50be",
-      "name": "wwww",
-      "img": "wwww",
-      "category": "",
-      "ingredients": [
-        {
-          "id": 0,
-          "ingredient": "a"
-        },
-        {
-          "id": 6,
-          "ingredient": "a"
-        },
-        {
-          "id": 8,
-          "ingredient": "ww"
-        }
-      ],
-      "instructions": []
+      "name": "w",
+      "img": "ww",
+      "category": "w",
+      "ingredients": [],
+      "instructions": [],
+      "id": "50be"
     },
     {
       "id": "77ab",

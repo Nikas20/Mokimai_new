@@ -1,6 +1,7 @@
 import { useParams } from "react-router";
 import { useState, useEffect } from "react";
 import { getOne } from "../service/get";
+import { Link } from "react-router";
 
 function RecipeCard() {
   const { id } = useParams();
@@ -19,14 +20,15 @@ function RecipeCard() {
 
   useEffect(() => {
     fetchRecipe();
-  }, [id]); // add dependency
+  }, [id]); 
 
   const { name, img, category, ingredients = [], instructions = [] } = recipe;
 
   return (
     <div>
       {error && <p>{error}</p>}
-
+{/* <div><RecipeEdit /></div> */}
+<Link to={`/edit/${id}`}>Edit</Link>
       <div>
         <h2>{name}</h2>
         <img src={img} alt={name} />

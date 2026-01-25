@@ -6,6 +6,7 @@ import Home from "./components/Home";
 import RecipeCard from "./components/RecipeCard";
 import RecipeContext from "./RecipeContext";
 import RecipeAdd from "./components/RecipeAdd";
+import RecipeEdit from "./components/RecipteEdit.jsx";
 function App() {
   const [recipes, setRecipes] = useState([]);
   const [error, setError] = useState(null);
@@ -25,6 +26,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/recipte/:id" element={<RecipeCard />} />
+          <Route path="/edit/:id" element={<RecipeEdit />} />
           <Route path="/add" element={<RecipeAdd />} />
         </Routes>
       </RecipeContext>

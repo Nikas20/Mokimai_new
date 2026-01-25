@@ -1,9 +1,10 @@
 import { useForm } from "react-hook-form";
-import { postData } from "../service/post";
+import { putData } from "../service/put";
 import { useState, useRef, useEffect } from "react";
-
-function RecipeAdd() {
-  const {
+import { useParams } from "react-router";
+function RecipeEdit() {
+    const { id } = useParams();
+    const {
     register,
     handleSubmit,
     setValue,
@@ -19,30 +20,39 @@ function RecipeAdd() {
     },
   });
 
-  const nextId = useRef(0);
-  const nextId2 = useRef(0);
-
-  const formSubmitHandler = async (FormData) => {
-    try {
-      const postedData = await postData(FormData);
-      if (postedData) alert("Post successfull");
-      reset();
-      setIngredients([]);
-      setInstructions([]);
-    } catch (error) {
-      console.log(error.message);
-    }
-  };
-
   const [ingredients, setIngredients] = useState([]);
   const [ingredient, setIngredient] = useState("");
 
   const [instructions, setInstructions] = useState([]);
   const [instruction, setInstruction] = useState("");
 
-  return (
+
+  const nextId = useRef(0);
+  const nextId2 = useRef(0);
+
+  const formSubmitHandler = async (FormData) => {
+      try {
+        const postedData = await putData(id, FormData);
+        if (postedData) alert("Post successfull");
+        reset();
+        setIngredients([]);
+        setInstructions([]);
+      } catch (error) {
+        console.log(error.message);
+      }
+    };
+
+    useEffect(() => {
+    setValue("ingredients", ingredients);
+  }, [ingredients, setValue]);
+
+  useEffect(() => {
+    setValue("instructions", instructions);
+  }, [instructions, setValue]);
+
+    return (
     <>
-      <form onSubmit={handleSubmit(formSubmitHandler)}>
+    <form onSubmit={handleSubmit(formSubmitHandler)}>
         <div>
           <div>
             <input
@@ -149,7 +159,6 @@ function RecipeAdd() {
         />
       </form>
     </>
-  );
+    )
 }
-
-export default RecipeAdd;
+export default RecipeEdit;
