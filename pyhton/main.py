@@ -1,39 +1,84 @@
-# This program registers users
-# It will be expanded step by step
+# # # # for i in range(1000):
+# # # #     file = open("example.txt")
+# # # #     file.write("Example")
+# # # # file.close()
+# # # # print(file)
 
 
+# # # # file = open("data/example.txt", "r") // peraso
+# # # # data = file.read()
 
 
-users = []
-running = True
-runner = make_runner(users)
+# # # # file = open("data/example.txt", "a") // prideda nauja
+# # # # file.write("\nNew Content2")
 
 
+# # # # file = open("data/example2.txt", "x") // sukuria nauja file
+# # # # file.write("Create new")
 
-while running:
-    print("\n=== MENU ===")
-    print("1. Register new user")
-    print("2. Show users table")
-    print("3. Search user by username")
-    print("4. Show statistics")
-    print("5. Show usernames")
-    print("6. Show email domain report")
-    print("7. Show adult users")
-    print("8. Show user emails")
-    print("9. Show users sorted by age")
-    print("10. Exit")
+# # # # file = open("data/example2.txt", "r+") // daro kelius darbus
+# # # # file.write("Create MEW")
+# # # # file.seek(0) // nuo kokios vetos skaitit
+# # # # content = file.read()
+# # # # print(content)
 
-    choice = int(input("Choose an option (1-9): "))
+# # # # file = open("data/example.txt", "r")
+# # # # content = file.readline()
 
-    if choice == 10:
-        print("Exiting program.")
-        running = False
-        continue
+# # # # print(content)
 
-    action = actions.get(choice)
+# # # # file = open("data/example.txt", "r")
 
-    if action is None:
-        print("Invalid option. Please choose 1-9")
-        continue
+# # # # for line in file:
+# # # #     print(line)
 
-    runner(action)
+
+# # # # file = open("data/example.txt", "w")
+
+# # # # file.write("Create MEW\n")
+# # # # file.write("Create MEEEW\n")
+
+# # # # file.close()
+
+# # # file = open("data/example.txt", "w")
+# # # file.writelines()
+
+
+# # with open("data/example.txt", "r") as file:
+# #     read = file.read()
+# #     print(read)
+
+# # import json
+
+# # data = {
+# #     "name": "Example",
+# #     "age": 25,
+# #     "active":True
+# #     }
+
+# # with open("data/data.json", "r") as file:
+# #     existing = json.load(file)
+
+# # existing.append(data)
+
+# # with open("data/data.json", "w") as file:
+# #     json.dump(existing, file, indent=4)
+
+
+# # text = "Hello"
+# # binary_text = b"Hello"
+
+# # print(text)
+# # print(binary_text)
+# # print(type(text))
+# # print(type(binary_text))
+
+# # with open("data/example.png", "rb") as file:
+# #     data = file.read()
+# # print(data[:20])
+
+# text = "Hello"
+
+# encoded_text = text.encode("utf-8")
+
+# print(type(encoded_text))
