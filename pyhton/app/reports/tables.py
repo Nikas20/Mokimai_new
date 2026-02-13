@@ -1,5 +1,5 @@
-from core import *
-from reports import extract_domain
+from ..core import *
+from ..reports import extract_domain
 def show_users_table(users):
     print("\n=== REGISTERED USERS ===")
 

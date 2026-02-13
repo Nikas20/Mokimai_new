@@ -1,4 +1,4 @@
-from reports import show_users_table
+from ..reports import show_users_table
 def show_users_sorted_by_age(users):
     print("\n=== USERS SORTED BY AGE ===")
 

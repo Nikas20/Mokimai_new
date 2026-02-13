@@ -1,3 +1,4 @@
+from ..services import register_user
 def make_runner(users):
     def runner(action):
         if action == register_user:

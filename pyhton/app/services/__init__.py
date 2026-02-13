@@ -1,3 +1,3 @@
-from registration import register_user
+from .registration import register_user, get_user_input
 
-__all__ = ["register_user"]
+__all__ = ["register_user","get_user_input"]

@@ -1,3 +1,3 @@
-from runner import make_runner
+from .runner import make_runner
 
 __all__ = ["make_runner"]

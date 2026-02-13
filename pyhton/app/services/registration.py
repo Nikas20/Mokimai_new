@@ -1,4 +1,4 @@
-from core import *
+from ..core import *
 def get_user_input():
     print("Welcome to the User Registration System v2")
     print("Follow the steps below to create your account.")
