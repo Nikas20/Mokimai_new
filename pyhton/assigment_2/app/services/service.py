@@ -1,2 +1,2 @@
 class PaymentService:
-    h = 1
+    pass
