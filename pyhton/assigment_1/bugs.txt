@@ -1,0 +1,27 @@
+Bug:1
+bug in order process_all_orders
+bug is not corect working validacion
+fixed with:
+elif order.get("order_id", None) is None:
+            continue
+
+Bug:2
+bug in validacija
+items 0 must not
+fixed with:
+elif order.get("items", []) == []:
+            continue
+
+Bug:3
+bug in Mokesčių skaičiavimas
+Europos Sąjungai taikomas 0.21 tarifas o buvo 0.20
+fixed with:
+pakejciau 0.20 i 0.21
+
+Bug:4
+bug in get_top_orders_by_numeric_field
+bug was sorting from smallest to biggest
+fixed with:
+add reverse=True in sort()
+
+Bug:5

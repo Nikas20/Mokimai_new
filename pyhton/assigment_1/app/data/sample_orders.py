@@ -1,0 +1,50 @@
+orders = [
+    {
+        "order_id": 101,
+        "customer_name": "Jonas Jonaitis",
+        "region": "EU",
+        "is_vip": True,
+        "items": [("Laptop", 1, 999.99), ("Mouse", 2, 25.0)],
+    },
+    {
+        "order_id": 102,
+        "customer_name": "Asta Astaite",
+        "region": "US",
+        "is_vip": False,
+        "items": [("Book", 3, 15.0), ("Pen", 0, 2.0)],
+    },
+    {
+        "order_id": 103,
+        "customer_name": "Mantas Mantautas",
+        "region": "UK",
+        "is_vip": True,
+        "items": [("Table", -1, 200.0), ("Chair", 2, 60.0)],
+    },
+    {
+        "customer_name": "No Id",
+        "region": "EU",
+        "is_vip": False,
+        "items": [("Something", 1, 10.0)],
+    },
+    {
+        "order_id": 104,
+        "customer_name": "Empty Items",
+        "region": "EU",
+        "is_vip": False,
+        "items": [],
+    },
+    {
+        "order_id": 105,
+        "customer_name": "High Value",
+        "region": "OTHER",
+        "is_vip": False,
+        "items": [("Server", 1, 600.0)],
+    },
+    {
+        "order_id": 106,
+        "customer_name": "Free Shipping Edge",
+        "region": "US",
+        "is_vip": False,
+        "items": [("Monitor", 2, 100.0)],
+    },
+]
