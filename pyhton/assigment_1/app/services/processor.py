@@ -42,7 +42,7 @@ def process_all_orders(orders):
     for order in orders:
         if order.get("order_id", None) is None:
             continue
-        elif order.get("items", []) == []:
+        elif order.get("items", None)  is None:
             continue
 
         items = order.get("items", [])
@@ -58,9 +58,10 @@ def process_all_orders(orders):
         subtotal = calculate_subtotal_amount(items)
         if subtotal == 0:
             add_tag_to_order(order, "INVALID-EMPTY")
+            continue
+        
 
         po = build_processed_order(order)
         processed.append(po)
-
     stats["processed_orders_count"] = len(processed)
     return processed, stats
