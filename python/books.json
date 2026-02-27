@@ -1,0 +1,32 @@
+[
+    {
+        "id": 1,
+        "title": "daa Book Title",
+        "author": "John dwwe",
+        "year": 2023,
+        "genre": "eqr2",
+        "pages": 320,
+        "price": 19.99,
+        "available": true
+    },
+    {
+        "id": 2,
+        "title": "daa Book Title",
+        "author": "John dwwe",
+        "year": 2023,
+        "genre": "eqr2",
+        "pages": 320,
+        "price": 19.99,
+        "available": true
+    },
+    {
+        "id": 3,
+        "title": "daa Book Title",
+        "author": "John dwwe",
+        "year": 2023,
+        "genre": "eqr2",
+        "pages": 320,
+        "price": 19.99,
+        "available": true
+    }
+]

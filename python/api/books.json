@@ -1,0 +1,32 @@
+[
+    {
+        "id": 1,
+        "title": "Sample Book Title",
+        "author": "John Doe",
+        "year": 2023,
+        "genre": "Fiction",
+        "pages": 320,
+        "price": 19.99,
+        "available": true
+    },
+    {
+        "id": 2,
+        "title": "The Hidden Path",
+        "author": "Jane Smith",
+        "year": 2021,
+        "genre": "Mystery",
+        "pages": 280,
+        "price": 14.99,
+        "available": true
+    },
+    {
+        "id": 4,
+        "title": "Gardening 101",
+        "author": "Bob Green",
+        "year": 2020,
+        "genre": "Non-Fiction",
+        "pages": 200,
+        "price": 12.99,
+        "available": true
+    }
+]

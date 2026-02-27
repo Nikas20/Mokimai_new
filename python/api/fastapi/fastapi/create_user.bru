@@ -1,0 +1,27 @@
+meta {
+  name: create_user
+  type: http
+  seq: 2
+}
+
+post {
+  url: http://127.0.0.1:8000/books
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "title": "daa Bgok Title",
+    "author": "John dwwedd",
+    "year": 2023,
+    "genre": "eqr2",
+    "pages": 320,
+    "price": 19.99,
+    "available": true
+  }
+}
+
+settings {
+  encodeUrl: true
+}
