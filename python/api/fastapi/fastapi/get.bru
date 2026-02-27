@@ -1,0 +1,19 @@
+meta {
+  name: get
+  type: http
+  seq: 2
+}
+
+get {
+  url: http://127.0.0.1:8000/books?available=false
+  body: none
+  auth: inherit
+}
+
+params:query {
+  available: false
+}
+
+settings {
+  encodeUrl: true
+}
