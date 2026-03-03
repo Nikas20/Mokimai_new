@@ -1,168 +1,93 @@
-from fastapi import FastAPI, HTTPException
-from pydantic import BaseModel
-from typing import Optional, List, Dict
-import json
 import aiofiles
+from contextlib import asynccontextmanager
+from fastapi import FastAPI, Depends, HTTPException
+from pydantic import BaseModel
+from sqlalchemy import text, Integer, String, Float, Boolean, select
+from sqlalchemy.ext.asyncio import create_async_engine, async_sessionmaker, AsyncSession  
+from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
+
+class Base(DeclarativeBase):
+    pass
+
+class Book(Base):
+    __tablename__ = "books"
+ 
+    id: Mapped[int] = mapped_column(Integer, primary_key=True, index=True)
+    title: Mapped[str] = mapped_column(String, nullable=False)
+    author: Mapped[str] = mapped_column(String, nullable=False)
+    year: Mapped[int] = mapped_column(Integer, nullable=False)
+    genre: Mapped[str] = mapped_column(String, nullable=False)
+    description: Mapped[str] = mapped_column(String, nullable=True)
+    pages: Mapped[int] = mapped_column(Integer, nullable=False)
+    price: Mapped[float] = mapped_column(Float, nullable=False)
+    in_stock: Mapped[bool] = mapped_column(Boolean, nullable=False, default=True)
 
 class BookCreate(BaseModel):
     title: str
     author: str
     year: int
     genre: str
+    description: str | None = None
     pages: int
     price: float
-    available: bool = True
+    in_stock: bool = True
 
-class BookUpdated(BaseModel):
-    title: Optional[str] = None
-    author: Optional[str] = None
-    year: Optional[int] = None
-    genre: Optional[str] = None
-    pages: Optional[int] = None
-    price: Optional[float] = None
-    available: Optional[bool] = None
 
-app = FastAPI()
-
-@app.get("/sync-json")
-def sync_json():
-    # Read JSON (blocking)
-    with open("books.json", "r") as f:
-        data = json.load(f)
-
-    # Update JSON
-    max_id = max(book["id"] for book in data)
-    mew_book_id = max_id + 1
-
-    # Write JSON (blocking)
-    with open("books.json", "w") as f:
-        json.dump(data, f)
-
-    return data
- 
-BOOKS_FILE = "books.json"
-
-@app.post("/books", status_code=201)
-async def create_book(book: BookCreate) -> Dict:
-
-    try:
-       async with aiofiles.open(BOOKS_FILE, "r") as f:
-            content = await f.read()
-            if content.strip():
-                books = json.loads(content)
-            else:
-                books = []
-    except FileNotFoundError:
-        books = []
-
-    next_id = max([book["id"] for book in books], default=0) + 1
-
-    new_book: Dict = {
-        "id": next_id,
-        "title": book.title,
-        "author": book.author,
-        "year": book.year,
-        "genre": book.genre,
-        "pages": book.pages,
-        "price": book.price,
-        "available": book.available,
+    model_config = {
+        "from_attributes": True
     }
 
-    books.append(new_book)
-    async with aiofiles.open(BOOKS_FILE, "w") as f:
-        await f.write(json.dumps(books, indent=4))
+DATABASE_URL = "sqlite+aiosqlite:///./app.db"
+engine = create_async_engine(DATABASE_URL, connect_args={"check_same_thread": False})
+
+AsyncSessionLocal = async_sessionmaker(
+    bind=engine,
+    autoflush=False,
+    expire_on_commit=False
+)
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    async with engine.begin() as conn:
+
+        await conn.run_sync(Base.metadata.create_all) 
+
+        result = await conn.execute(
+            text("SELECT name FROM sqlite_master WHERE type='table' ORDER BY name;")
+        )
+        tables = result.all()
+        print(f"Database initialized. Tables: {tables}")
+        
+    yield
+    await engine.dispose()
+    print("Database connection closed.")
+
+async def get_db():
+    async with AsyncSessionLocal() as db:
+        yield db
+
+app = FastAPI(lifespan=lifespan)
+
+@app.post("/books", response_model=BookCreate, status_code=201)
+async def create_book(book: BookCreate, db: AsyncSession = Depends(get_db)):
+    """
+    Sukuriamas naujas knygos įrašas. 
+    Naudojamas response_model, kad išvengtume ResponseValidationError.
+    """
+    new_book = Book(**book.model_dump())
+
+    db.add(new_book)
+    await db.commit()
+    await db.refresh(new_book)
 
     return new_book
 
-# @app.post("/books", status_code=201)
-# def create_book(book: BookCreate) -> Dict:
-
-#     try:
-#         with open(BOOKS_FILE, "r") as f:
-#             books = json.load(f)
-#     except FileNotFoundError:
-#         books = []
-
-#     next_id = max([book["id"] for book in books], default=0) + 1
-
-#     new_book: Dict = {
-#         "id": next_id,
-#         "title": book.title,
-#         "author": book.author,
-#         "year": book.year,
-#         "genre": book.genre,
-#         "pages": book.pages,
-#         "price": book.price,
-#         "available": book.available,
-#     }
-
-#     books.append(new_book)
-#     with open(BOOKS_FILE, "w") as f:
-#         json.dump(books, f, indent=4)
-
-#     return new_book
-
-
-@app.get("/books/{book_id}")
-def get_book(book_id) -> Dict:
-    for book in books:
-        if book["id"] == int(book_id):
-            return book
-    raise HTTPException(status_code=404, detail="Book not found")
-
-@app.delete("/books/{book_id}", status_code=204)
-def delete_book(book_id):
-    for index, book in enumerate(books):
-        if book["id"] == int(book_id):
-            books.pop(index)
-            return None
-
-@app.put("/books/{book_id}")
-def update_book(book_id, updated: BookUpdated) -> Dict:
-    for book in books:
-        if book["id"] == int(book_id):
-            if updated.title is not None:
-                book["title"] = updated.title
-            if updated.author is not None:
-                book["author"] = updated.author
-            if updated.year is not None:
-                book["year"] = updated.year
-            if updated.genre is not None:
-                book["genre"] = updated.genre
-            if updated.pages is not None:
-                book["pages"] = updated.pages
-            if updated.price is not None:
-                book["price"] = updated.price
-            if updated.available is not None:
-                book["available"] = updated.available
-            return book
-
-
-@app.get("/books")
-def list_books(search=None, genre=None, available=None, sort=None):
-    result = books
-    if search is not None:
-        search_book = search.lower()
-        result = [
-            book for book in result
-            if search_book in book["title"].lower()
-            or search_book in book["author"].lower()
-        ]
-    
-    if genre is not None:
-        result = [book_sorting for book_sorting in result if book_sorting["genre"] == genre]
-
-    
-    if available is not None:
-        result = [book_sorting for book_sorting in result if book_sorting["available"] == available]
-
-
-    if sort is not None:
-        if sort not in ["id", "title", "author", "year", "genre", "available"]:
-            raise HTTPException (status_code=400, detail="Invalid sort field") 
-        result = sorted(result, key=lambda book_sorting: book_sorting [sort])
-
-    return result
+@app.get("/books", response_model=list[BookCreate])
+async def list_books(db: AsyncSession = Depends(get_db)):
+    """Grąžina visų knygų sąrašą."""
+    result = await db.execute(select(Book))
+    books = result.scalars().all()
+    return books
 
 if __name__ == "__main__":
     import uvicorn

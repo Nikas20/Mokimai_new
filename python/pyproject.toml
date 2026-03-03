@@ -10,6 +10,9 @@ python = ">=3.11,<4.0"
 fastapi = "^0.133.0"
 uvicorn = "^0.41.0"
 ruff = "^0.15.4"
+aiofiles = "^25.1.0"
+sqlalchemy = "^2.0.48"
+aiosqlite = "^0.22.1"
 
 [tool.poetry.group.dev.dependencies]
 black = "^26.1.0"
