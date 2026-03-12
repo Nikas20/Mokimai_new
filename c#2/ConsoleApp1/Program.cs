@@ -15,6 +15,7 @@ namespace MyApp
             // Task7();
             // Task8();
             // Task9();
+            // Task10();
             Console.WriteLine("Hello World!");
         }
 
@@ -135,6 +136,43 @@ namespace MyApp
 
             Console.WriteLine($"\nGreatest Common Divisor (GCD) of {num1} and {num2} is: {a}");
         }
+
+    static void Task10()
+    {
+        int result;
+        Console.Write("Write (n) Fibonacci number.: ");
+        if (int.TryParse(Console.ReadLine(), out int n) && n >= 0)
+        {
+            if (n == 0) 
+            {
+                result = 0;
+            }
+            else if (n == 1) 
+            {
+                result = 1;
+            }
+            else 
+            {
+                int a = 0;
+                int b = 1;
+                int c = 0;
+
+                for (int i = 2; i <= n; i++)
+                {
+                    c = a + b;
+                    a = b;
+                    b = c;
+                }
+                result = b;
+            }
+            Console.WriteLine(result);
+        }
+        else
+        {
+            Console.WriteLine("Not correct number");
+        }
+    }
+
 
     }
 }
