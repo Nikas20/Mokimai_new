@@ -11,9 +11,8 @@ namespace MyApp
             var a = 1;
             var b = 2;
             var c = 3;
-
             
-
+            
             if(a > b)
             {
               Console.WriteLine("a didesne uz b");  
@@ -57,7 +56,7 @@ namespace MyApp
 
             var n = 5;
 
-            if(n / 2 == 0)
+            if(n % 2 == 0)
             {
                  Console.WriteLine("lyginid");
             }
@@ -65,7 +64,40 @@ namespace MyApp
             {
                  Console.WriteLine("nelinis");
             }
-            
+
+            // 5
+
+            if(a + b > c)
+            {
+                 Console.WriteLine("ab daugiau c");
+            }
+            else if(a + b < c)
+            {
+                 Console.WriteLine("ab maziau c");
+            }
+            else
+            {
+                 Console.WriteLine("ab lygu c");
+            }
+
+            // 6
+             Console.Write("6: Įveskite metus: ");
+            int m = int.Parse(Console.ReadLine());
+            if ((m % 4 == 0 && m % 100 != 0) || (m % 400 == 0))
+                Console.WriteLine("Metai yra keliamieji");
+            else
+                Console.WriteLine("Metai nera keliamieji");
+
+            // 7
+
+            Console.WriteLine("7: Įveskite valandas ir minutes:");
+            Console.Write("Valandos: ");
+            int h = int.Parse(Console.ReadLine());
+            Console.Write("Minutės: ");
+            int min = int.Parse(Console.ReadLine());
+
+            int allmin = (h * 60) + min ;
+            Console.WriteLine($"Nuo vidurnakčio praėjo {allmin} minučių.");
 
             Console.WriteLine("Hello World!");
         }
