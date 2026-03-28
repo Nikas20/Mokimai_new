@@ -7,6 +7,12 @@ namespace MyApp
         private double Base{ get; set;}
         private double Height{ get; set;}
 
+        public Triangle()
+        {
+            this.Base = 0;
+            this.Height = 0;
+        }
+
         public Triangle(double Base, double Height)
         {
             this.Base = Base;

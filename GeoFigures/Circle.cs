@@ -6,6 +6,11 @@ namespace MyApp
     {
         private double radius{ get; set;}
 
+        public Circle()
+        {
+            this.radius = 0;
+        }
+
         public Circle(double radius)
         {
             this.radius = radius;

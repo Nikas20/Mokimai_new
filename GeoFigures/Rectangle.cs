@@ -7,6 +7,12 @@ namespace MyApp
         private double Width{ get; set;}
         private double Height{ get; set;}
 
+        public Rectangle()
+        {
+            this.Width = 0;
+            this.Height = 0;
+        }
+
         public Rectangle(double Width , double Height)
         {
             this.Width  = Width ;
