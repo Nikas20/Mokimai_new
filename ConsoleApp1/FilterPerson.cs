@@ -16,5 +16,45 @@ namespace MyApp
                 _ => new List<Person>()
             };
         }
+
+        public static List<Person> MultiFilter(List<Person> people, string filters, string values)
+        {
+
+            var filterIds = filters.Split(' ', StringSplitOptions.RemoveEmptyEntries)
+                                   .Select(int.Parse)
+                                   .ToList();
+
+
+            var valueList = values.Split(' ', StringSplitOptions.RemoveEmptyEntries).ToList();
+
+            IEnumerable<Person> query = people;
+
+            for (int i = 0; i < filterIds.Count; i++)
+            {
+                int category = filterIds[i];
+
+
+                if (i < valueList.Count)
+                {
+                    string val = valueList[i];
+                    query = query.Where(GetPredicate(category, val));
+                }
+            }
+
+            return query.ToList();
+        }
+
+        private static Func<Person, bool> GetPredicate(int category, string value)
+        {
+            return category switch
+            {
+                1 => p => p.FirstName == value,
+                2 => p => p.LastName == value,
+                3 => p => p.Birthdate.ToString() == value,
+                4 => p => p.Age.ToString() == value,
+                5 => p => p.City == value,
+                _ => p => true
+            };
+        }
     }
 }

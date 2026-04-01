@@ -1,6 +1,6 @@
-Jonas Jonaitis 30 Vilnius
-Petras Petraitis 45 Kaunas
-Ona Onienė 22 Klaipėda
-Mantas Mantinis 50 Šiauliai
-Eglė Eglaitė 28 Panevėžys
-Tomas Tomaitis 40 Vilnius
+Jonas Jonaitis 15.05.1993 0:00:00 Vilnius
+Petras Petraitis 20.08.1978 0:00:00 Kaunas
+Ona Onienė 10.12.2001 0:00:00 Klaipėda
+Mantas Mantinis 25.03.1973 0:00:00 Šiauliai
+Eglė Eglaitė 05.11.1995 0:00:00 Panevėžys
+Tomas Tomaitis 30.07.1983 0:00:00 Vilnius
