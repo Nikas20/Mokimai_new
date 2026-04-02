@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using Person = MyApp.Person;
 
 namespace MyApp
 {
@@ -52,6 +53,35 @@ namespace MyApp
                 5 => p => p.City,
                 _ => p => p.FirstName 
             };
+        }
+
+        public static void OrderPersonMethod()
+        {
+            Console.WriteLine("Write category to ORDER: 1 - FirstName, 2 - LastName, 3 - Birthdate, 4 - City");
+            int categ = int.Parse(Console.ReadLine());
+
+            List<Person> peopleFromFile = Person.LoadFromFile();
+
+            var sortedPeople = OrderPerson.Order(peopleFromFile, categ);
+
+            foreach (var per in sortedPeople)
+            {
+                Console.WriteLine($"{per.FirstName} {per.LastName}, Birthdate: {per.Birthdate}, City: {per.City}");
+            }
+        }
+        public static void MultipleOrderPersonMethod()
+        {
+            Console.WriteLine("Write categories to ORDER (comma separated): 1 - FirstName, 2 - LastName, 3 - Birthdate, 4 - City");
+            string categ = Console.ReadLine();
+
+            List<Person> peopleFromFile = Person.LoadFromFile();
+
+            var sortedPeople = OrderPerson.MultipleOrder(peopleFromFile, categ);
+
+            foreach (var per in sortedPeople)
+            {
+                Console.WriteLine($"{per.FirstName} {per.LastName}, Birthdate: {per.Birthdate}, City: {per.City}");
+            }
         }
     }
 

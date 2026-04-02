@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using Person = MyApp.Person;
 
 namespace MyApp
 {
@@ -55,6 +56,41 @@ namespace MyApp
                 5 => p => p.City == value,
                 _ => p => true
             };
+        }
+
+
+        public static void FilterPersonMethod()
+        {
+            Console.WriteLine("Write category to FILTER: 1 - FirstName, 2 - LastName, 3 - Birthdate, 4 - City");
+            int categ = int.Parse(Console.ReadLine());
+            Console.WriteLine("Write value:");
+            string input = Console.ReadLine();
+
+            List<Person> peopleFromFile = Person.LoadFromFile();
+
+            var filterPeople = FilterPerson.Filter(peopleFromFile, categ, input);
+
+            foreach (var per in filterPeople)
+            {
+                Console.WriteLine($"{per.FirstName} {per.LastName}, Age: {per.Age}, City: {per.City}");
+            }
+        }
+        public static void MultipleFilterPersonMethod()
+        {
+            Console.WriteLine("Write categories to FILTER : 1 - FirstName, 2 - LastName, 3 - Birthdate, 4 - City");
+            string categ = Console.ReadLine();
+            Console.WriteLine("Write value:");
+            string input = Console.ReadLine();
+
+            List<Person> peopleFromFile = Person.LoadFromFile();
+
+            var filterPeople = FilterPerson.MultiFilter(peopleFromFile, categ, input);
+
+            foreach (var per in filterPeople)
+            {
+                Console.WriteLine($"{per.FirstName} {per.LastName}, Age: {per.Age}, City: {per.City}");
+            }
+
         }
     }
 }
