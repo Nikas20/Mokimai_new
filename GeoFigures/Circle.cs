@@ -2,7 +2,7 @@ using System;
 
 namespace MyApp
 {
-    internal class Circle
+    internal class Circle : Shape
     {
         private double radius{ get; set;}
 
@@ -10,7 +10,7 @@ namespace MyApp
         {
             this.radius = radius;
         }
-        public double GetArea()
+        public override double GetArea()
         {
             return Math.PI * radius * radius;
         }

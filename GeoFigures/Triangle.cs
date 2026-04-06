@@ -2,7 +2,7 @@ using System;
 
 namespace MyApp
 {
-    internal class Triangle
+    internal class Triangle : Shape
     {
         private double Base{ get; set;}
         private double Height{ get; set;}
@@ -17,7 +17,7 @@ namespace MyApp
         {
             return 0.5 * Base * Height;
         }
-        public double GetPerimeter()
+        public override double GetPerimeter()
         {
             double side = Math.Sqrt(Math.Pow(Base / 2, 2) + Math.Pow(Height, 2));
             return Base + 2 * side;
