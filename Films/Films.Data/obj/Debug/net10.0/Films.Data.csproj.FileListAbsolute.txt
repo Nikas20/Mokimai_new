@@ -1,0 +1,6 @@
+C:\Users\VHJP\Desktop\git\Mokimai_new\Films\Films.Data\obj\Debug\net10.0\Films.Data.csproj.AssemblyReference.cache
+C:\Users\VHJP\Desktop\git\Mokimai_new\Films\Films.Data\obj\Debug\net10.0\Films.Data.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\VHJP\Desktop\git\Mokimai_new\Films\Films.Data\obj\Debug\net10.0\Films.Data.AssemblyInfoInputs.cache
+C:\Users\VHJP\Desktop\git\Mokimai_new\Films\Films.Data\obj\Debug\net10.0\Films.Data.AssemblyInfo.cs
+C:\Users\VHJP\Desktop\git\Mokimai_new\Films\Films.Data\obj\Debug\net10.0\Films.Data.csproj.CoreCompileInputs.cache
+C:\Users\VHJP\Desktop\git\Mokimai_new\Films\Films.Data\obj\Debug\net10.0\Films.Data.sourcelink.json

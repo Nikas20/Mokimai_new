@@ -667,6 +667,57 @@
         "build": {
           "buildTransitive/net8.0/_._": {}
         }
+      },
+      "Films.Data/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v10.0",
+        "dependencies": {
+          "Films.Entities": "1.0.0",
+          "Pomelo.EntityFrameworkCore.MySql": "8.0.3"
+        },
+        "compile": {
+          "bin/placeholder/Films.Data.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Films.Data.dll": {}
+        }
+      },
+      "Films.Entities/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v10.0",
+        "compile": {
+          "bin/placeholder/Films.Entities.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Films.Entities.dll": {}
+        }
+      },
+      "Films.Repositories/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v10.0",
+        "dependencies": {
+          "Films.Data": "1.0.0",
+          "Films.Entities": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Films.Repositories.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Films.Repositories.dll": {}
+        }
+      },
+      "Films.Services/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v10.0",
+        "dependencies": {
+          "Films.Repositories": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Films.Services.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Films.Services.dll": {}
+        }
       }
     }
   },
@@ -2205,10 +2256,31 @@
         "system.composition.typedparts.nuspec",
         "useSharedDesignerContext.txt"
       ]
+    },
+    "Films.Data/1.0.0": {
+      "type": "project",
+      "path": "../Films.Data/Films.Data.csproj",
+      "msbuildProject": "../Films.Data/Films.Data.csproj"
+    },
+    "Films.Entities/1.0.0": {
+      "type": "project",
+      "path": "../Films.Entities/Films.Entities.csproj",
+      "msbuildProject": "../Films.Entities/Films.Entities.csproj"
+    },
+    "Films.Repositories/1.0.0": {
+      "type": "project",
+      "path": "../Films.Repositories/Films.Repositories.csproj",
+      "msbuildProject": "../Films.Repositories/Films.Repositories.csproj"
+    },
+    "Films.Services/1.0.0": {
+      "type": "project",
+      "path": "../Films.Services/Films.Services.csproj",
+      "msbuildProject": "../Films.Services/Films.Services.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net10.0": [
+      "Films.Services >= 1.0.0",
       "Microsoft.AspNetCore.OpenApi >= 10.0.5",
       "Microsoft.EntityFrameworkCore.Design >= 10.0.7",
       "Pomelo.EntityFrameworkCore.MySql >= 9.0.0"
@@ -2245,7 +2317,11 @@
       "frameworks": {
         "net10.0": {
           "targetAlias": "net10.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\VHJP\\Desktop\\git\\Mokimai_new\\Films\\Films.Services\\Films.Services.csproj": {
+              "projectPath": "C:\\Users\\VHJP\\Desktop\\git\\Mokimai_new\\Films\\Films.Services\\Films.Services.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

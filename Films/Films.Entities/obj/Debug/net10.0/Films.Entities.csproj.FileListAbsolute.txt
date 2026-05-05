@@ -1,0 +1,12 @@
+C:\Users\VHJP\Desktop\git\Mokimai_new\Films\Films.Entities\bin\Debug\net10.0\Films.Entities.deps.json
+C:\Users\VHJP\Desktop\git\Mokimai_new\Films\Films.Entities\bin\Debug\net10.0\Films.Entities.dll
+C:\Users\VHJP\Desktop\git\Mokimai_new\Films\Films.Entities\bin\Debug\net10.0\Films.Entities.pdb
+C:\Users\VHJP\Desktop\git\Mokimai_new\Films\Films.Entities\obj\Debug\net10.0\Films.Entities.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\VHJP\Desktop\git\Mokimai_new\Films\Films.Entities\obj\Debug\net10.0\Films.Entities.AssemblyInfoInputs.cache
+C:\Users\VHJP\Desktop\git\Mokimai_new\Films\Films.Entities\obj\Debug\net10.0\Films.Entities.AssemblyInfo.cs
+C:\Users\VHJP\Desktop\git\Mokimai_new\Films\Films.Entities\obj\Debug\net10.0\Films.Entities.csproj.CoreCompileInputs.cache
+C:\Users\VHJP\Desktop\git\Mokimai_new\Films\Films.Entities\obj\Debug\net10.0\Films.Entities.sourcelink.json
+C:\Users\VHJP\Desktop\git\Mokimai_new\Films\Films.Entities\obj\Debug\net10.0\Films.Entities.dll
+C:\Users\VHJP\Desktop\git\Mokimai_new\Films\Films.Entities\obj\Debug\net10.0\refint\Films.Entities.dll
+C:\Users\VHJP\Desktop\git\Mokimai_new\Films\Films.Entities\obj\Debug\net10.0\Films.Entities.pdb
+C:\Users\VHJP\Desktop\git\Mokimai_new\Films\Films.Entities\obj\Debug\net10.0\ref\Films.Entities.dll
