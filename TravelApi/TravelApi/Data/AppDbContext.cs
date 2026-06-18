@@ -5,12 +5,15 @@ namespace TravelApi.Data;
 
 public class AppDbContext : DbContext
 {
-    public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
+    public AppDbContext(DbContextOptions<AppDbContext> options)
+        : base(options)
+    {
+    }
 
     public DbSet<Account> Accounts => Set<Account>();
     public DbSet<Role> Roles => Set<Role>();
     public DbSet<AccountRole> AccountRoles => Set<AccountRole>();
-    public DbSet<Tour> Tours => Set<Tour>();
+    public DbSet<Taask> Taasks => Set<Taask>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -28,5 +31,11 @@ public class AppDbContext : DbContext
             .HasOne(ar => ar.Role)
             .WithMany(r => r.AccountRoles)
             .HasForeignKey(ar => ar.RoleId);
+
+        modelBuilder.Entity<Taask>()
+            .HasOne(t => t.Account)
+            .WithMany(a => a.Taasks)
+            .HasForeignKey(t => t.AccountId)
+            .OnDelete(DeleteBehavior.Cascade);
     }
 }

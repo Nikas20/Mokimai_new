@@ -1,15 +1,14 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TravelApi.Data;
+using TravelApi.DTO;
 using TravelApi.Models;
 using TravelApi.Services;
-using System.Text;
-using System.Net.Http.Headers;
 
 namespace TravelApi.Controllers;
 
 [ApiController]
-[Route("api")]
+[Route("api/auth")]
 public class AuthController : ControllerBase
 {
     private readonly AppDbContext _context;
@@ -24,15 +23,10 @@ public class AuthController : ControllerBase
     }
 
     [HttpPost("register")]
-    public async Task<IActionResult> Register([FromBody] RegisterDto dto)
+    public async Task<IActionResult> Register(RegisterDto dto)
     {
-        Console.WriteLine($"Register: Email={dto.Email}, Password={dto.Password}");
-        
-        if (string.IsNullOrEmpty(dto.Email))
-            return BadRequest(new { message = "Email is required" });
-
         if (await _context.Accounts.AnyAsync(x => x.Email == dto.Email))
-            return BadRequest(new { message = "Account with this email already exists!" });
+            return BadRequest("Email exists");
 
         var account = new Account
         {
@@ -43,64 +37,49 @@ public class AuthController : ControllerBase
         _context.Accounts.Add(account);
         await _context.SaveChangesAsync();
 
-        var userRole = await _context.Roles.FirstOrDefaultAsync(r => r.RoleName == "USER");
-        if (userRole == null)
+        var role = await _context.Roles.FirstOrDefaultAsync(x => x.RoleName == "USER");
+
+        if (role == null)
         {
-            userRole = new Role("USER");
-            _context.Roles.Add(userRole);
+            role = new Role("USER");
+            _context.Roles.Add(role);
             await _context.SaveChangesAsync();
         }
 
-        _context.AccountRoles.Add(new AccountRole { AccountId = account.Id, RoleId = userRole.Id });
+        _context.AccountRoles.Add(new AccountRole
+        {
+            AccountId = account.Id,
+            RoleId = role.Id
+        });
+
         await _context.SaveChangesAsync();
 
-        var token = _jwtService.Generate(account);
-        return Ok(token);
+        var full = await _context.Accounts
+            .Include(x => x.AccountRoles)
+            .ThenInclude(x => x.Role)
+            .FirstAsync(x => x.Id == account.Id);
+
+        var token = _jwtService.Generate(full);
+
+        return Ok(new { token });
     }
 
-    [HttpPost("token")]
-    public async Task<IActionResult> Token()
+    [HttpPost("login")]
+    public async Task<IActionResult> Login(LoginDto dto)
     {
-        // Читаем Basic Auth из заголовка
-        string email = null;
-        string password = null;
-        
-        var authHeader = Request.Headers["Authorization"].ToString();
-        if (!string.IsNullOrEmpty(authHeader) && authHeader.StartsWith("Basic "))
-        {
-            var encodedUsernamePassword = authHeader.Substring("Basic ".Length).Trim();
-            var decodedBytes = Convert.FromBase64String(encodedUsernamePassword);
-            var decodedString = Encoding.UTF8.GetString(decodedBytes);
-            var credentials = decodedString.Split(':', 2);
-            
-            if (credentials.Length == 2)
-            {
-                email = credentials[0];
-                password = credentials[1];
-            }
-        }
-        
-        Console.WriteLine($"Token request from Basic Auth: Email={email}");
-        
-        if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))
-            return Unauthorized(new { message = "Email and password required" });
-
         var account = await _context.Accounts
-            .Include(a => a.AccountRoles)
-            .ThenInclude(ar => ar.Role)
-            .FirstOrDefaultAsync(x => x.Email == email);
+            .Include(x => x.AccountRoles)
+            .ThenInclude(x => x.Role)
+            .FirstOrDefaultAsync(x => x.Email == dto.Email);
 
-        if (account == null || !_passwordService.Verify(password, account.Password))
-            return Unauthorized(new { message = "Invalid email or password" });
+        if (account == null)
+            return Unauthorized();
+
+        if (!_passwordService.Verify(dto.Password, account.Password))
+            return Unauthorized();
 
         var token = _jwtService.Generate(account);
-        return Ok(token);
-    }
-}
 
-public class RegisterDto
-{
-    public string Username { get; set; } = string.Empty;
-    public string Email { get; set; } = string.Empty;
-    public string Password { get; set; } = string.Empty;
+        return Ok(new { token });
+    }
 }

@@ -3,71 +3,114 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Text;
+using System.Security.Claims;
 using TravelApi.Data;
 using TravelApi.Services;
+using TravelApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// CORS - ВРЕМЕННО РАЗРЕШАЕМ ВСЕ (для отладки)
-builder.Services.AddCors(options =>
+// ================= CONTROLLERS =================
+builder.Services.AddControllers();
+builder.Services.AddEndpointsApiExplorer();
+
+// ================= SWAGGER =================
+builder.Services.AddSwaggerGen(c =>
 {
-    options.AddPolicy("AllowAll", policy =>
+    c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
-        policy.AllowAnyOrigin()
-              .AllowAnyMethod()
-              .AllowAnyHeader();
+        Name = "Authorization",
+        Type = SecuritySchemeType.Http,
+        Scheme = "bearer",
+        BearerFormat = "JWT",
+        In = ParameterLocation.Header
+    });
+
+    c.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        {
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference
+                {
+                    Type = ReferenceType.SecurityScheme,
+                    Id = "Bearer"
+                }
+            },
+            new string[] {}
+        }
     });
 });
 
-builder.Services.AddControllers();
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-
-// Database
+// ================= DB =================
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseMySql(
         builder.Configuration.GetConnectionString("DefaultConnection"),
         new MySqlServerVersion(new Version(8, 0, 0))
     ));
 
-// Services
+// ================= SERVICES =================
 builder.Services.AddScoped<PasswordService>();
 builder.Services.AddScoped<JwtService>();
 
-// JWT Authentication
-var jwtKey = builder.Configuration["Jwt:Key"] ?? "your-super-secret-key-with-at-least-32-characters";
+// ================= JWT =================
+var jwtKey = builder.Configuration["Jwt:Key"]!;
+var jwtIssuer = builder.Configuration["Jwt:Issuer"]!;
+var jwtAudience = builder.Configuration["Jwt:Audience"]!;
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-    .AddJwtBearer(options =>
+.AddJwtBearer(options =>
+{
+    options.TokenValidationParameters = new TokenValidationParameters
     {
-        options.TokenValidationParameters = new TokenValidationParameters
-        {
-            ValidateIssuer = true,
-            ValidateAudience = true,
-            ValidateLifetime = true,
-            ValidateIssuerSigningKey = true,
-            ValidIssuer = builder.Configuration["Jwt:Issuer"] ?? "self",
-            ValidAudience = builder.Configuration["Jwt:Audience"] ?? "api",
-            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtKey))
-        };
-    });
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidateLifetime = true,
+        ValidateIssuerSigningKey = true,
+
+        ValidIssuer = jwtIssuer,
+        ValidAudience = jwtAudience,
+
+        IssuerSigningKey = new SymmetricSecurityKey(
+            Encoding.UTF8.GetBytes(jwtKey)
+        ),
+
+        NameClaimType = ClaimTypes.NameIdentifier,
+        RoleClaimType = ClaimTypes.Role
+    };
+});
 
 builder.Services.AddAuthorization();
 
 var app = builder.Build();
 
-// CORS должен быть ПЕРВЫМ в конвейере!
-app.UseCors("AllowAll");
-
-if (app.Environment.IsDevelopment())
+// ================= SEED ROLES (🔥 ADD THIS) =================
+using (var scope = app.Services.CreateScope())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+
+    if (!db.Roles.Any(r => r.RoleName == "USER"))
+        db.Roles.Add(new Role("USER"));
+
+    if (!db.Roles.Any(r => r.RoleName == "ADMIN"))
+        db.Roles.Add(new Role("ADMIN"));
+
+    db.SaveChanges();
 }
 
-app.UseHttpsRedirection();
+// ================= PIPELINE =================
+app.UseSwagger();
+app.UseSwaggerUI();
+
+app.UseCors(x =>
+    x.AllowAnyOrigin()
+     .AllowAnyMethod()
+     .AllowAnyHeader()
+);
+
 app.UseAuthentication();
 app.UseAuthorization();
+
 app.MapControllers();
 
 app.Run();
